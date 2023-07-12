@@ -1,11 +1,13 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export default function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
 
   console.log(name, email, password);
 
@@ -25,8 +27,11 @@ export default function Signup() {
     e.preventDefault();
 
     axios
-      .post("mongodb://localhost:27017/", { name, email, password })
-      .then((res) => console.log(res))
+      .post("http://127.0.0.1:8000/signup", { name, email, password })
+      .then((res) => {
+        console.log(res);
+        navigate("/login");
+      })
       .catch((err) => console.log(err));
   };
 

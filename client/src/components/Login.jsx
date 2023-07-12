@@ -1,10 +1,12 @@
 import axios from "axios";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
 
   console.log(email, password);
 
@@ -22,8 +24,13 @@ export default function Login() {
     e.preventDefault();
 
     axios
-      .get("mongodb://localhost:27017/", { email, password })
-      .then((res) => console.log(res))
+      .post("http://127.0.0.1:8000/login", { email, password })
+      .then((res) => {
+        console.log(res);
+        if (res.data === "Success") {
+          navigate("/");
+        }
+      })
       .catch((err) => console.log(err));
   };
 

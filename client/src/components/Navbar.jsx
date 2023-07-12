@@ -4,7 +4,10 @@ export default function Navbar() {
   return (
     <div className="d-flex justify-content-between align-items-center mb-4 pb-4">
       <div>
-        <Link to="/" className="fs-2 text-decoration-none text-uppercase fw-bold">
+        <Link
+          to="/"
+          className="fs-2 text-decoration-none text-uppercase fw-bold text-primary"
+        >
           Auth.
         </Link>
       </div>
